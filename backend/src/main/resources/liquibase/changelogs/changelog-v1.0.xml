@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<!--<include file="liquibase/changelog/initial_schema.xml" relativeToChangelogFile="false"/>-->
+
+    <!-- Create Table COMMANDS -->
+    <changeSet id="createTableCommands" author="luiz_borges">
+        <createTable tableName="COMMANDS">
+            <column name="COMMAND_ID" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="COMMAND_NUMBER" type="INTEGER"/>
+            <column name="COMMAND_VALUE" type="NUMBER(10,2)" defaultValueNumeric="0" />
+            <column name="DATETIME_COMMAND" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create Table PRODUCTS -->
+    <changeSet id="createTableProducts" author="luiz_borges">
+        <createTable tableName="PRODUCTS">
+            <column name="PRODUCT_ID" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="true"/>
+            </column>
+            <column name="PRODUCT_NAME" type="VARCHAR(255)"/>
+            <column name="PRODUCT_VALUE" type="NUMBER(10,2)" defaultValueNumeric="0" />
+            <column name="PRODUCT_TYPE" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create Table PRODUCT_COMMAND -->
+    <changeSet id="createTableProductCommand" author="luiz_borges">
+        <createTable tableName="PRODUCT_COMMAND">
+            <column name="PRODUCT_DEMAND_ID" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PC_QUANTITY" type="NUMBER(10,2)"/>
+            <column name="PC_DATETIME_ORDER" type="DATE"/>
+            <column name="PRODUCT_ID" type="INTEGER"/>
+            <column name="COMMAND_ID" type="INTEGER"/>
+            <column name="PC_MEASUREMENT" type="VARCHAR(2)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Add Foreign Key Constraint for PRODUCT_COMMAND to COMMANDS -->
+    <changeSet id="addForeignKeyCommand" author="luiz_borges">
+        <addForeignKeyConstraint baseTableName="PRODUCT_COMMAND" baseColumnNames="COMMAND_ID"
+                                 referencedTableName="COMMANDS" referencedColumnNames="COMMAND_ID" constraintName="FK_PRODUCT_COMMAND_COMMANDS"/>
+    </changeSet>
+
+    <!-- Add Foreign Key Constraint for PRODUCT_COMMAND to PRODUCTS -->
+    <changeSet id="addForeignKeyProducts" author="luiz_borges">
+        <addForeignKeyConstraint baseTableName="PRODUCT_COMMAND" baseColumnNames="PRODUCT_ID"
+                                 referencedTableName="PRODUCTS" referencedColumnNames="PRODUCT_ID" constraintName="FK_PRODUCT_COMMAND_PRODUCTS"/>
+    </changeSet>
+
+    <!-- Create Sequence COMMANDS_SEQ -->
+    <changeSet id="createSequenceCommandsSeq" author="luiz_borges">
+        <createSequence sequenceName="COMMANDS_SEQ" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Create Sequence PRODUCT_COMMAND_SEQ -->
+    <changeSet id="createSequenceProductCommandSeq" author="luiz_borges">
+        <createSequence sequenceName="PRODUCT_COMMAND_SEQ" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Create Sequence PRODUCTS_SEQ -->
+    <changeSet id="createSequenceProductsSeq" author="luiz_borges">
+        <createSequence sequenceName="PRODUCTS_SEQ" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+	
+</databaseChangeLog>
