@@ -1,7 +1,7 @@
 FROM maven:3.8.3-openjdk-17
 
-ENV PROJECT_HOME /usr/src/fluffyapp
-ENV JAR_NAME fluffyapp.jar
+ENV PROJECT_HOME /usr/src/todosimpleapp
+ENV JAR_NAME todosimpleapp.jar
 
 # Create destination directory
 RUN mkdir -p $PROJECT_HOME
@@ -16,4 +16,4 @@ RUN mvn clean package -DskipTests
 # Move file
 RUN mv $PROJECT_HOME/target/$JAR_NAME $PROJECT_HOME/
 
-ENTRYPOINT ["java", "-jar", "-Dspring.config.location=application.properties", "fluffyapp.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "todosimpleapp.jar"]
