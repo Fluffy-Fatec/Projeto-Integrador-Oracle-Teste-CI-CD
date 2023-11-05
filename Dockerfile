@@ -7,15 +7,14 @@ ENV JAR_NAME fluffyapp.jar
 RUN mkdir -p $PROJECT_HOME
 WORKDIR $PROJECT_HOME
 
-# Bundle app source
-COPY . .
+# Copy the contents of the 'src' directory into the container
+COPY ./backend/src/ .
 
 # Package the application as a JAR file
 RUN mvn clean package -DskipTests
 
-# Move file
+# Move the JAR file
 RUN mv $PROJECT_HOME/target/$JAR_NAME $PROJECT_HOME/
-RUN mv $PROJECT_HOME/src/main/resources/application.properties $PROJECT_HOME/
 
 # Set the working directory
 WORKDIR $PROJECT_HOME
