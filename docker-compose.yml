@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /usr/src/fluffyapp
+    container_name: fluffyapp
+    restart: on-failure
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@//your-oracle-cloud-url:1521/your-service-name
+      - SPRING_DATASOURCE_USERNAME=seu-usuario
+      - SPRING_DATASOURCE_PASSWORD=sua-senha
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+
+volumes:
+  mysqlvolume:

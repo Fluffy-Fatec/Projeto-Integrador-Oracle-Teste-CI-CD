@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  fluffyapp-deploy:
+    name: Deploy | Fluffy Backend
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Copy FluffyApp to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          # Github path
+          source: "**"
+          # VPS path
+          target: "~/fluffyapp"
+
+      - name: Create FluffyApp .env file
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/fluffyapp
+            rm .env
+            touch .env
+            echo SPRING_LOCAL_PORT=${{ secrets.SPRING_LOCAL_PORT }} >> .env
+            echo SPRING_DOCKER_PORT=${{ secrets.SPRING_DOCKER_PORT }} >> .env
+
+      - name: Build and Start Docker-compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/fluffyapp
+            docker-compose build --no-cache app
+            docker-compose up -d app
