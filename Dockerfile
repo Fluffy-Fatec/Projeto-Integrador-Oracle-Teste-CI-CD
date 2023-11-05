@@ -1,19 +1,18 @@
 FROM maven:3.8.3-openjdk-17
 
 ENV PROJECT_HOME /usr/src/fluffyapp
-ENV JAR_NAME fluffyapp.jar
 
-# Create destination directory
-RUN mkdir -p $PROJECT_HOME
+# Define o diretório de trabalho no contêiner
 WORKDIR $PROJECT_HOME
 
-# Copy the contents of the 'backend' directory into the container
+# Copia o conteúdo do projeto para o contêiner
 COPY . .
 
-# Package the application as a JAR file
-RUN mvn clean package -DskipTests
+# Executa o Maven para construir o projeto
+RUN mvn -f backend/pom.xml clean package -DskipTests
 
-# Move the JAR file
-RUN mv $PROJECT_HOME/target/$JAR_NAME $PROJECT_HOME/
+# Move o arquivo JAR para a raiz do projeto no contêiner
+RUN mv backend/target/*.jar $PROJECT_HOME/fluffyapp.jar
 
+# Define a entrada do contêiner
 ENTRYPOINT ["java", "-jar", "-Dspring.config.location=application.properties", "fluffyapp.jar"]
