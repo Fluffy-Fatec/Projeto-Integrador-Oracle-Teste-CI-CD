@@ -15,4 +15,4 @@ RUN mvn -f backend/pom.xml clean package -DskipTests
 RUN mv backend/target/*.jar $PROJECT_HOME/fluffyapp.jar
 
 # Define a entrada do contêiner
-ENTRYPOINT ["java", "-jar", "-Dspring.config.location=/backend/src/main/resources/application.properties", "fluffyapp.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=application.properties", "fluffyapp.jar"]
