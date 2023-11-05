@@ -38,8 +38,8 @@ public class CsvControllerTest {
     @Test
     public void testUploadCsvSuccess() throws IOException, CsvValidationException {
         // Create a MockMultipartFile with file name, field name, and content
-        String csvContent = "Product Name,Product Value,Product Type,PC Quantity,PC Measurement,Command Number,PC Datetime Order,Datetime Command,Command Value\n"
-                + "Product 1,10.0,Type A,5.0,cm,123,2023-09-18 10:00:00,2023-09-18 11:00:00,12.3\n";
+        String csvContent = "Product Name,Product Value,Product Type,Status,PC Quantity,PC Measurement,Command Number,PC Datetime Order,Datetime Command,Command Value\n"
+                + "Product 1,10.0,Type A,Ativo,5.0,cm,123,2023-09-18 10:00:00,2023-09-18 11:00:00,12.3\n";
         MultipartFile mockFile = new MockMultipartFile("file", "test.csv", "text/csv", csvContent.getBytes());
 
         ResponseEntity<String> response = csvController.uploadCsv(mockFile);

@@ -31,6 +31,7 @@ public class CsvService {
 			product.setName(csvData.getProductName());
 			product.setValue(csvData.getProductValue());
 			product.setType(csvData.getProductType());
+			product.setStatus(csvData.getStatus());
 			productRepository.saveAndFlush(product);
 
 			Command command = new Command();
@@ -44,7 +45,7 @@ public class CsvService {
 			productCommand.setCommand(command);
 			productCommand.setPcQuantity(csvData.getPcQuantity());
 			productCommand.setPcMeasurement(csvData.getPcMeasurement());
-//			productCommand.setPcTurn(csvData.getPcTurn());
+			//productCommand.set(csvData.getPcTurn());
 			productCommand.setPcDatetimeOrder(csvData.getPcDatetimeOrder());
 			productCommandRepository.saveAndFlush(productCommand);
 		}

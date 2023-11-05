@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class CsvData {
 
-
 	private String productName;
 	private BigDecimal productValue;
 	private String productType;
@@ -18,4 +17,5 @@ public class CsvData {
 	private Timestamp pcDatetimeOrder;
 	private Timestamp commandDateTime;
 	private BigDecimal commandValue;
+	private String status;
 }

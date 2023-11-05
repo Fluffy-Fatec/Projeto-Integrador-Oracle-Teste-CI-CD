@@ -52,6 +52,7 @@ public class CsvServiceTest {
         csvData.setProductName("Pastel");
         csvData.setProductValue(BigDecimal.valueOf(35.0));
         csvData.setProductType("Fritos");
+        csvData.setStatus("Ativo");
         csvData.setPcQuantity(BigDecimal.valueOf(1.0));
         csvData.setPcMeasurement("Kg");
         csvData.setCommandNumber(123);
@@ -62,6 +63,7 @@ public class CsvServiceTest {
         product.setName(csvData.getProductName());
         product.setValue(csvData.getProductValue());
         product.setType(csvData.getProductType());
+        product.setStatus(csvData.getStatus());
 
         Command command = new Command();
         command.setCommandNumber(csvData.getCommandNumber());

@@ -1,7 +1,6 @@
 package com.fluffy.backend.entity;
 
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -25,10 +24,10 @@ public class Command {
 
 	@Column(name = "COMMAND_NUMBER")
 	private Integer commandNumber;
-	
+
 	@Column(name = "DATETIME_COMMAND")
 	private Timestamp commandDateTime;
-	
+
 	@Column(name = "COMMAND_VALUE")
 	private BigDecimal commandValue;
 
