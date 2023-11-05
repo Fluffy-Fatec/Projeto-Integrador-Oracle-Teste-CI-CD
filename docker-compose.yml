@@ -11,9 +11,9 @@ services:
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@//your-oracle-cloud-url:1521/your-service-name
-      - SPRING_DATASOURCE_USERNAME=seu-usuario
-      - SPRING_DATASOURCE_PASSWORD=sua-senha
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@bdoracledinner_medium?TNS_ADMIN=/Users/oracle
+      - SPRING_DATASOURCE_USERNAME=ADMIN
+      - SPRING_DATASOURCE_PASSWORD=Fluffyfatec123
     volumes:
       - .m2:/root/.m2
     stdin_open: true
