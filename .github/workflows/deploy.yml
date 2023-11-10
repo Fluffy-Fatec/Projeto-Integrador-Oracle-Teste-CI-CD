@@ -92,8 +92,8 @@ jobs:
             cd ~/fluffyapp
             docker-compose build --no-cache app
             docker-compose up -d app
-on:
-  workflow_run:
-    workflows: ["Fluffy CD"]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: ["Fluffy CD"]
+#     types:
+#       - completed
