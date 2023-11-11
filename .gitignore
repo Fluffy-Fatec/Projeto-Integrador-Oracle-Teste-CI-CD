@@ -1,0 +1,4 @@
+# Arquivos Oracle Wallet
+*.sso
+cwallet.sso
+ewallet.p12
