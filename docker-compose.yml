@@ -12,9 +12,10 @@ services:
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:mem:db
-      - SPRING_DATASOURCE_USERNAME=sa
-      - SPRING_DATASOURCE_PASSWORD=sa
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=oracle.jdbc.OracleDriver
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@bdfluffy_low?TNS_ADMIN=/Users/oracle
+      - SPRING_DATASOURCE_USERNAME=ADMIN
+      - SPRING_DATASOURCE_PASSWORD=Fluffyfatec123
     volumes:
       - .m2:/root/.m2
     stdin_open: true
