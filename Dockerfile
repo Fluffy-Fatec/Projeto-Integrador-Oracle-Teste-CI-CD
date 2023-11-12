@@ -7,7 +7,6 @@ WORKDIR $PROJECT_HOME
 
 # Copia o conteúdo do projeto para o contêiner
 COPY . .
-COPY wallet /wallet
 
 # Executa o Maven para construir o projeto
 RUN mvn -f backend/pom.xml clean package -DskipTests

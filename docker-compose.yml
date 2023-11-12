@@ -27,7 +27,6 @@ services:
       - spring.datasource.oracleucp.max-pool-size=30
     volumes:
       - .m2:/root/.m2
-      - ./wallet:/wallet
     stdin_open: true
     tty: true
 
