@@ -8,37 +8,48 @@ on:
 
 jobs:
   fluffyapp-CI:
+    # Executa o job em um ambiente virtual Ubuntu mais recente
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    # Faz o checkout do código para o ambiente de execução do GitHub Actions
+    - uses: actions/checkout@v3
 
-      - name: Configurar JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
+    # Configura o ambiente Java JDK 11
+    - name: Configurar JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
 
-      - name: Cache de pacotes Maven
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+    # Armazena em cache as dependências do Maven para acelerar as construções subsequentes
+    - name: Cache de pacotes Maven
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
 
-      - name: Compilar com Maven
-        run: mvn -B package --file backend/pom.xml
+    # Compila o projeto usando o Maven
+    - name: Compilar com Maven
+      run: mvn -B package --file backend/pom.xml
+       # Executa os testes automatizados
+    - name: Executar testes
+      run: mvn test --file backend/pom.xml
 
-      - name: Executar testes
-        run: mvn test --file backend/pom.xml
+    # Gera e publica relatórios de cobertura de testes (opcional)
+    - name: Gerar relatório de cobertura
+      run: mvn test jacoco:report --file backend/pom.xml
 
-      - name: Gerar relatório de cobertura
-        run: mvn test jacoco:report --file backend/pom.xml
 
   fluffyapp-deploy:
     name: Deploy | Fluffy Backend
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
 
     steps:
       - name: Checkout
@@ -51,7 +62,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
+          # Github path
           source: "**"
+          # VPS path
           target: "~/fluffyapp"
 
       - name: Create FluffyApp .env file
@@ -79,9 +92,8 @@ jobs:
             cd ~/fluffyapp
             docker-compose build --no-cache app
             docker-compose up -d app
-
-on:
-  workflow_run:
-    workflows: ["Fluffy CD"]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: ["Fluffy CD"]
+#     types:
+#       - completed
