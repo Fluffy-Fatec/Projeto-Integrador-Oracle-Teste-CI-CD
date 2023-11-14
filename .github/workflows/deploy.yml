@@ -47,6 +47,8 @@ jobs:
     name: Deploy | Fluffy Backend
     runs-on: ${{ matrix.os }}
 
+    needs: fluffyapp-CI
+    
     strategy:
       matrix:
         os: [ubuntu-latest]
