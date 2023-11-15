@@ -1,0 +1,8 @@
+com\fluffy\backend\service\CsvServiceTest.class
+com\fluffy\backend\util\CsvUtilsTest.class
+com\fluffy\backend\service\SuppliersServiceTest.class
+com\fluffy\backend\service\CsvSupplierServiceTest.class
+com\fluffy\backend\BackendApplicationTests.class
+com\fluffy\backend\util\CsvSupplierUtilsTest.class
+com\fluffy\backend\controller\CsvSupplierControllerTest.class
+com\fluffy\backend\controller\CsvControllerTest.class

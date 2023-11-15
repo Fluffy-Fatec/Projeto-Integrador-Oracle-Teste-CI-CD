@@ -13,9 +13,9 @@ services:
       - "$SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT"
     volumes:
       - .m2:/root/.m2
-      - /usr/src/fluffyapp/wallet:/usr/src/fluffyapp/wallet
+      - oracle_wallet:/usr/src/fluffyapp/wallet
     stdin_open: true
     tty: true
 
 volumes:
-  mysqlvolume:
+  oracle_wallet:
