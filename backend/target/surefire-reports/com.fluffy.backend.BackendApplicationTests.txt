@@ -1,23 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.fluffy.backend.BackendApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 67.91 s <<< FAILURE! - in com.fluffy.backend.BackendApplicationTests
-contextLoads  Time elapsed: 0.027 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: 
-Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Invocation of init method failed; nested exception is liquibase.exception.ValidationFailedException: Validation Failed:
-     4 change sets check sum
-          liquibase/changelogs/changelog-v1.0.xml::createFeedstocksTable::luiz_borges was: 8:e762636069c15acd7aef866f667207a3 but is now: 8:1d1e6b3f2e3b27507783fcaab2fe7e93
-          liquibase/changelogs/changelog-v1.0.xml::createSupplierFeedstockOfferTable::luiz_borges was: 8:08b8ea2c677cf2f0135f0c1923bb40a7 but is now: 8:03158d904cecbdf1d8fbb0bc06b31edc
-          liquibase/changelogs/changelog-v1.0.xml::createSupplierFeedstockTable::luiz_borges was: 8:b81735c0b5b9b6b6286d8e2e43c7f397 but is now: 8:d3c775f3484cd7216e40c29ffad56900
-          liquibase/changelogs/changelog-v1.0.xml::createFeedstockProductTable::luiz_borges was: 8:abe622c7646715893e0ace4201d43a0c but is now: 8:215351f70dca073f5dbd8cadf4d5fb90
-
-Caused by: liquibase.exception.ValidationFailedException: 
-Validation Failed:
-     4 change sets check sum
-          liquibase/changelogs/changelog-v1.0.xml::createFeedstocksTable::luiz_borges was: 8:e762636069c15acd7aef866f667207a3 but is now: 8:1d1e6b3f2e3b27507783fcaab2fe7e93
-          liquibase/changelogs/changelog-v1.0.xml::createSupplierFeedstockOfferTable::luiz_borges was: 8:08b8ea2c677cf2f0135f0c1923bb40a7 but is now: 8:03158d904cecbdf1d8fbb0bc06b31edc
-          liquibase/changelogs/changelog-v1.0.xml::createSupplierFeedstockTable::luiz_borges was: 8:b81735c0b5b9b6b6286d8e2e43c7f397 but is now: 8:d3c775f3484cd7216e40c29ffad56900
-          liquibase/changelogs/changelog-v1.0.xml::createFeedstockProductTable::luiz_borges was: 8:abe622c7646715893e0ace4201d43a0c but is now: 8:215351f70dca073f5dbd8cadf4d5fb90
-
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.931 s - in com.fluffy.backend.BackendApplicationTests
