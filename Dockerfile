@@ -8,4 +8,5 @@ RUN mvn -f backend/pom.xml clean package -DskipTests
 FROM openjdk:17-jdk-alpine
 WORKDIR /usr/src/fluffyapp
 COPY --from=build /usr/src/fluffyapp/backend/target/*.jar fluffyapp.jar
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=application.properties", "fluffyapp.jar"]
+COPY --from=build /usr/src/fluffyapp/wallet /usr/src/fluffyapp/wallet
+ENTRYPOINT ["java", "-jar", "-Doracle.net.tns_admin=/usr/src/fluffyapp/wallet", "fluffyapp.jar"]
