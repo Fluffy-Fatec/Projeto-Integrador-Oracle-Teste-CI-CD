@@ -94,6 +94,32 @@ jobs:
             cd ~/fluffyapp
             docker-compose build --no-cache app
             docker-compose up -d app
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up secret file
+      env:
+        DEBUG_DOCKER_PORT: ${{ secrets.SPRING_DOCKER_PORT }}
+        DEBUG_LOCAL_PORT: ${{ secrets.SPRING_LOCAL_PORT }}
+        DEBUG_SSH_HOST: ${{ secrets.SSH_HOST }}
+        DEBUG_SSH_KEY: ${{ secrets.SSH_KEY }}
+        DEBUG_SSH_PORT: ${{ secrets.SSH_PORT }}
+        DEBUG_SSH_USER: ${{ secrets.SSH_USER }}
+      run: |
+        echo $DEBUG_DOCKER_PORT >> secrets.txt
+        echo $DEBUG_LOCAL_PORT >> secrets.txt
+        echo $DEBUG_SSH_HOST >> secrets.txt
+        echo $DEBUG_SSH_KEY >> secrets.txt
+        echo $DEBUG_SSH_PORT >> secrets.txt
+        echo $DEBUG_SSH_USER >> secrets.txt
+
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
 # on:
 #   workflow_run:
 #     workflows: ["Fluffy CD"]
